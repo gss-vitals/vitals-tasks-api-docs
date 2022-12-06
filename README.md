@@ -1,3 +1,18 @@
+#### 目錄
+
+- [getProducts](#1-getProducts)
+- [Authentication](#2-authentication)
+  - [Browser-based authentication](#21-browser-based-authentication)
+  - [Self-issued access tokens](#22-self-issued-access-tokens)
+- [Resources](#3-resources)
+  - [Users](#31-users)
+  - [Publications](#32-publications)
+  - [Posts](#33-posts)
+  - [Images](#34-images)
+- [Testing](#4-testing)
+
+##
+
 ## 使用說明
 
 透過以下 API 呼叫，您可以對應操作：
@@ -24,9 +39,10 @@ GET /products
 | image_url    | string  | 產品圖片 |
 
 ### 範例
+```
 GET /products
-
-json
+```
+```
 [
   {
     "id": 1,
@@ -43,3 +59,4 @@ json
     "image_url": "https://example.com/s10.jpg"
   }
 ]
+```
