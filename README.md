@@ -1,62 +1,80 @@
 #### 目錄
-
-- [getProducts](#1-getProducts)
-- [Authentication](#2-authentication)
-  - [Browser-based authentication](#21-browser-based-authentication)
-  - [Self-issued access tokens](#22-self-issued-access-tokens)
-- [Resources](#3-resources)
-  - [Users](#31-users)
-  - [Publications](#32-publications)
-  - [Posts](#33-posts)
-  - [Images](#34-images)
-- [Testing](#4-testing)
+- [基本欄位])(#0. 基本欄位)
+- [即將截止與已逾期的任務](#1. 即將截止與已逾期的任務)
+- [我指派的任務](#2-我指派的任務) 
+- [指派給我的任務](#3-指派給我的任務) 
+- [任務狀態統計](#4-任務狀態統計)
 
 ##
 
-## 使用說明
+### 0. 基本欄位
+所有 API 皆遵循此規範
 
-透過以下 API 呼叫，您可以對應操作：
-
-### 名稱
-getProducts
-
-### 描述
-取得產品列表
-
-### 調用
-GET /products
-
-### 請求參數
-無
+### 請求參數 (調用任何 API 時皆須傳入以下三個參數)
+| 名稱        | 類型    | 描述   |
+| ------------ | ------- | ----------- |
+| ApiKey      | string | ApiKey |
+| TenantId    | string  | TenantId |
+| LoginId        | string | LoginId |
 
 ### 返回資料
 | 名稱        | 類型    | 描述   |
 | ------------ | ------- | ------ |
-| id           | integer | 產品ID |
-| name         | string  | 產品名稱 |
-| price        | integer | 產品價格 |
-| description  | string  | 產品描述 |
-| image_url    | string  | 產品圖片 |
+| ResultStatus           | boolean | 回傳結果狀態 |
+| ExceptionType         | string  | XXXX |
+| ResultMessage        | string | XXXX |
+| Body  | jsonObject  | 詳細資料 |
+
+##
+
+### 1. 即將截止與已逾期的任務
+取得即將截止與已逾期的任務
+
+### 調用
+POST /api/task/expired
+
+### 請求參數 Body
+| 名稱        | 類型    | 描述   |
+| ------------ | ------- | ------------------------------------------------------ |
+| Status       | integer | 狀態 0:未完成 1:已完成 |
+| ParticipantType| array  | 1:負責人 2:指派者 3:協同指派者 4:協同負責人 5:閱覽者 |
+| ExpiredDateStart        | string | 截止起日 格式為:2022-12-31T23:59 |
+| ExpiredDateEnd        | string | 截止迄日 格式為:2022-12-31T23:59 |
+| CurrentPage        | integer | 目前頁數 |
+| PageCount        | integer | 每頁筆數 |
+
+### 返回資料 Body
+| 名稱        | 類型    | 描述   |
+| ------------ | ------- | ------ |
+| TotalCount           | integer | 總筆數 |
+| XXX         | XXX  | XXXX |
 
 ### 範例
 ```
-GET /products
+POST /api/task/expired?ApiKey=8578cd8ca7274af0ac48cd13aa6f531c&TenantId=default&LoginId=willy_chang
 ```
 ```
-[
-  {
-    "id": 1,
-    "name": "Apple iPhone 11 Pro",
-    "price": 54800,
-    "description": "The latest generation of Apple's flagship iPhone.",
-    "image_url": "https://example.com/iphone11.jpg"
-  },
-  {
-    "id": 2,
-    "name": "Samsung Galaxy S10 Plus",
-    "price": 49800,
-    "description": "Samsung's latest premium smartphone.",
-    "image_url": "https://example.com/s10.jpg"
-  }
-]
+{
+    "Status":1,
+    "ParticipantType": [1, 2],
+    "ExpiredDateStart": "2019-02-02T00:00",
+    "ExpiredDateEnd": "2052-03-13T00:00",
+    "CurrentPage": 1,
+    "PageCount":10
+}
 ```
+
+##
+
+### 2. 我指派的任務
+取得我指派的任務
+
+##
+
+### 3. 指派給我的任務
+取得指派給我的任務
+
+##
+
+### 4. 任務狀態統計
+取得任務狀態統計
