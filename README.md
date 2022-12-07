@@ -1,6 +1,6 @@
 #### 目錄
 
-- [基本欄位](#0-基本欄位) 
+- [基本欄位](#基本欄位) 
 - [即將截止與已逾期的任務](#1-即將截止與已逾期的任務) 
 - [我指派的任務](#2-我指派的任務) 
 - [指派給我的任務](#3-指派給我的任務) 
@@ -8,22 +8,22 @@
 
 ##
 
-### 0. 基本欄位
-所有 API 皆遵循此規範
+### 基本欄位
+所有 API 呼叫時皆需傳入下方三個參數，並且固定回傳下方格式
 
-### 請求參數 (調用任何 API 時皆須傳入以下三個參數)
-| 名稱        | 類型    | 描述   |
-| ------------ | ------- | ----------- |
-| ApiKey      | string | ApiKey |
-| TenantId    | string  | TenantId |
-| LoginId        | string | LoginId |
+### 請求參數 
+| 名稱         | 是否必填 | 類型    | 描述   | 
+| ------------ | ------- | ------- | --------------------------------- |
+| ApiKey      | 是 | string | 填入申請的 ApiKey |
+| TenantId    | 是 | string  | 填入 TenantId |
+| LoginId        | 是 | string | 填入 LoginId |
 
 ### 返回資料
 | 名稱        | 類型    | 描述   |
 | ------------ | ------- | ------ |
-| ResultStatus           | boolean | 回傳結果狀態 |
-| ExceptionType         | string  | XXXX |
-| ResultMessage        | string | XXXX |
+| ResultStatus           | boolean | 是否成功呼叫 |
+| ExceptionType         | string  | 錯誤訊息類別 |
+| ResultMessage        | string | 錯誤訊息原因 |
 | Body  | jsonObject  | 詳細資料 |
 
 ##
@@ -31,18 +31,18 @@
 ### 1. 即將截止與已逾期的任務
 取得即將截止與已逾期的任務
 
-### 調用
+### 呼叫方式
 POST /api/task/expired
 
 ### 請求參數 Body
-| 名稱        | 類型    | 描述   |
-| ------------ | ------- | ------------------------------------------------------ |
-| Status       | integer | 狀態 0:未完成 1:已完成 |
-| ParticipantType| array  | 1:負責人 2:指派者 3:協同指派者 4:協同負責人 5:閱覽者 |
-| ExpiredDateStart        | string | 截止起日 格式為:2022-12-31T23:59 |
-| ExpiredDateEnd        | string | 截止迄日 格式為:2022-12-31T23:59 |
-| CurrentPage        | integer | 目前頁數 |
-| PageCount        | integer | 每頁筆數 |
+| 名稱        | 是否必填| 類型    | 描述   |
+| ------------ | ------- | ------- | ------------------------------------------------------ |
+| Status       | 是 | integer | 狀態 0:未完成 1:已完成 |
+| ParticipantType | 是 | array  | 1:負責人 2:指派者 3:協同指派者 4:協同負責人 5:閱覽者 |
+| ExpiredDateStart | 是   | string | 截止起日 格式為:2022-12-31T23:59 |
+| ExpiredDateEnd | 是   | string | 截止迄日 格式為:2022-12-31T23:59 |
+| CurrentPage | 是  | integer | 目前頁數 |
+| PageCount | 是  | integer | 每頁筆數 |
 
 ### 返回資料 Body
 | 名稱        | 類型    | 描述   |
